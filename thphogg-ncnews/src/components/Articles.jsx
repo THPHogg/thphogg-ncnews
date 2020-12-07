@@ -5,16 +5,20 @@ import { Link } from '@reach/router';
 class Articles extends Component {
   state = {
     articles: [],
+    isLoading: true,
   };
 
   componentDidMount() {
     getArticles().then((articles) => {
-      this.setState({ articles });
+      this.setState({ articles, isLoading: false });
     });
   }
 
   render() {
-    const { articles } = this.state;
+    const { articles, isLoading } = this.state;
+    if (isLoading) {
+      return <p>This page is currently loading!</p>;
+    }
     return (
       <div>
         <h3>These are the current articles on NC News:</h3>

@@ -4,16 +4,20 @@ import { getTopics } from '../api';
 class Topics extends Component {
   state = {
     topics: [],
+    isLoading: true,
   };
 
   componentDidMount() {
     getTopics().then((topics) => {
-      this.setState({ topics });
+      this.setState({ topics, isLoading: false });
     });
   }
 
   render() {
-    const { topics } = this.state;
+    const { topics, isLoading } = this.state;
+    if (isLoading) {
+      return <p>This page is currently loading!</p>;
+    }
     return (
       <div>
         <h3>These are the topics currently being talked about on NC News:</h3>
