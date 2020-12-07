@@ -1,9 +1,23 @@
 import './App.css';
+import { Router } from '@reach/router';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import HomePage from './components/HomePage';
+import Topics from './components/Topics';
+import Articles from './components/Articles';
+import Article from './components/Article';
 
 function App() {
   return (
-    <div>
-      <p>Hello!</p>
+    <div className="newsApp">
+      <Header />
+      <NavBar />
+      <Router>
+        <HomePage path="/" />
+        <Topics path="/topics" />
+        <Articles path="/articles" />
+        <Article path="/articles/:article_id" />
+      </Router>
     </div>
   );
 }
