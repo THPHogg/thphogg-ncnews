@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getArticles } from '../api';
 import { Link } from '@reach/router';
+import moment from 'moment';
 
 class Articles extends Component {
   state = {
@@ -26,7 +27,7 @@ class Articles extends Component {
     if (sortByVal) {
       getArticles(currentSortBy, currentOrder).then((articles) => {
         this.setState({
-          ...articles,
+          articles: [...articles],
           sort_by: currentSortBy,
           order: currentOrder,
         });
@@ -34,7 +35,7 @@ class Articles extends Component {
     } else if (orderVal) {
       getArticles(currentSortBy, currentOrder).then((articles) => {
         this.setState({
-          ...articles,
+          articles: [...articles],
           sort_by: currentSortBy,
           order: currentOrder,
         });
@@ -81,7 +82,10 @@ class Articles extends Component {
               >
                 <li>
                   Title: {article.title}, <br></br>Author: {article.author},
-                  <br></br>Votes: {article.votes}
+                  <br></br>Date Created:{' '}
+                  {moment(article.created_at, 'YYYYMMDD').fromNow()},<br></br>
+                  Comment Count: {article.comment_count},<br></br>
+                  Votes: {article.votes}
                 </li>
               </Link>
             );
