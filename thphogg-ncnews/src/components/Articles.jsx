@@ -9,37 +9,61 @@ class Articles extends Component {
     isLoading: true,
     sort_by: 'created_at',
     order: 'desc',
+    topic: '',
   };
 
   componentDidMount() {
-    getArticles().then((articles) => {
-      this.setState({ articles, isLoading: false });
+    const newTopic = this.props.topicSlug;
+    const currentSortBy = this.state.sort_by;
+    const currentOrder = this.state.order;
+
+    getArticles(currentSortBy, currentOrder, newTopic).then((articles) => {
+      this.setState({ articles, isLoading: false, topic: newTopic });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
     const currentSortBy = this.state.sort_by;
     const currentOrder = this.state.order;
+    const currentTopic = this.state.topic;
 
     const sortByVal = prevState.sort_by !== currentSortBy;
     const orderVal = prevState.order !== currentOrder;
+    const topicVal = prevState.topic !== currentTopic;
 
     if (sortByVal) {
-      getArticles(currentSortBy, currentOrder).then((articles) => {
-        this.setState({
-          articles: [...articles],
-          sort_by: currentSortBy,
-          order: currentOrder,
-        });
-      });
+      getArticles(currentSortBy, currentOrder, currentTopic).then(
+        (articles) => {
+          this.setState({
+            articles: [...articles],
+            sort_by: currentSortBy,
+            order: currentOrder,
+            topic: currentTopic,
+          });
+        }
+      );
     } else if (orderVal) {
-      getArticles(currentSortBy, currentOrder).then((articles) => {
-        this.setState({
-          articles: [...articles],
-          sort_by: currentSortBy,
-          order: currentOrder,
-        });
-      });
+      getArticles(currentSortBy, currentOrder, currentTopic).then(
+        (articles) => {
+          this.setState({
+            articles: [...articles],
+            sort_by: currentSortBy,
+            order: currentOrder,
+            topic: currentTopic,
+          });
+        }
+      );
+    } else if (topicVal) {
+      getArticles(currentSortBy, currentOrder, currentTopic).then(
+        (articles) => {
+          this.setState({
+            articles: [...articles],
+            sort_by: currentSortBy,
+            order: currentOrder,
+            topic: currentTopic,
+          });
+        }
+      );
     }
   }
 
@@ -49,13 +73,18 @@ class Articles extends Component {
   };
 
   render() {
-    const { articles, isLoading } = this.state;
+    const { articles, isLoading, topic } = this.state;
     if (isLoading) {
       return <p>This page is currently loading!</p>;
     }
     return (
       <div>
         <h3>These are the current articles on NC News:</h3>
+        {topic ? (
+          <p>You are currently looking at all the {topic} articles</p>
+        ) : (
+          ''
+        )}
         <label>
           Order by:
           <select onChange={this.handleChange} name="order" id="order">
@@ -64,6 +93,7 @@ class Articles extends Component {
           </select>
         </label>
         <label>
+          {'  '}
           Sort by:
           <select onChange={this.handleChange} name="sort_by" id="sort_by">
             <option value="created_at">Date Created</option>
@@ -81,10 +111,12 @@ class Articles extends Component {
                 to={`/articles/${article.article_id}`}
               >
                 <li className="articleCard">
-                  Title: {article.title}, <br></br>Author: {article.author},
-                  <br></br>Date Created:{' '}
-                  {moment(article.created_at, 'YYYYMMDD').fromNow()},<br></br>
-                  Comment Count: {article.comment_count},<br></br>
+                  Title: {article.title} <br></br>Author: {article.author}
+                  <br></br>Created:{' '}
+                  {moment(article.created_at, 'YYYYMMDD').fromNow()}
+                  <br></br>
+                  Comment Count: {article.comment_count}
+                  <br></br>
                   Votes: {article.votes}
                 </li>
               </Link>
