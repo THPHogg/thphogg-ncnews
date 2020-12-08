@@ -3,3 +3,60 @@
   list-style-type: none;
   padding: 0;
 }
+body {
+  background-color: #bfc0c0;
+}
+
+a:link {
+  text-decoration: none;
+  color: #5e6472;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #5e6472;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #ef8354;
+}
+
+a:active {
+  text-decoration: none;
+  color: #5e6472;
+}
+
+body {
+  font-family: Georgia;
+}
+
+#order {
+  background-color: #ffffff;
+}
+
+#sort_by {
+  background-color: #ffffff;
+}
+
+.navBar {
+  margin: 1em;
+  font-size: 20px;
+}
+
+.articleCard,
+.topicCard,
+.singleArticleCard {
+  background-color: #ffffff;
+  max-width: 40%;
+  margin: auto;
+  margin-top: 1em;
+  border-radius: 15px;
+  padding: 1em 2em;
+  box-shadow: 5px 5px #ef8354;
+}
+
+.commentCard {
+  margin-top: 2em;
+  border-bottom: 2px solid #5e6472;
+}

@@ -24,7 +24,7 @@ class Topics extends Component {
         <ul>
           {topics.map((topic) => {
             return (
-              <li key={topic.slug}>
+              <li key={topic.slug} className="topicCard">
                 {topic.slug}: {topic.description}
               </li>
             );

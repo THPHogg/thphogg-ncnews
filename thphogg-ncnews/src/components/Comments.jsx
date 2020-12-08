@@ -26,9 +26,16 @@ class Comments extends Component {
         <ul>
           {comments.map((comment) => {
             return (
-              <li key={comment.comments_id}>
-                Comment: {comment.body}, <br></br>Author: {comment.author},
-                <br></br>Votes: {comment.votes}
+              <li key={comment.comments_id} className="commentCard">
+                {comment.body}, <br></br>
+                <br></br>
+                <b>Written By: </b>
+                {comment.author},<br></br>
+                <br></br>
+                <b>Votes: </b>
+                {comment.votes}
+                <br></br>
+                <br></br>
               </li>
             );
           })}

@@ -80,7 +80,7 @@ class Articles extends Component {
                 key={article.article_id}
                 to={`/articles/${article.article_id}`}
               >
-                <li>
+                <li className="articleCard">
                   Title: {article.title}, <br></br>Author: {article.author},
                   <br></br>Date Created:{' '}
                   {moment(article.created_at, 'YYYYMMDD').fromNow()},<br></br>

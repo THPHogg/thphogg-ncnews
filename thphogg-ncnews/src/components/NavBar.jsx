@@ -4,9 +4,15 @@ import { Link } from '@reach/router';
 const NavBar = () => {
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/articles">Articles</Link>
-      <Link to="/topics">Topics</Link>
+      <Link to="/" className="navBar">
+        Home
+      </Link>
+      <Link to="/articles" className="navBar">
+        Articles
+      </Link>
+      <Link to="/topics" className="navBar">
+        Topics
+      </Link>
     </nav>
   );
 };

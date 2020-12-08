@@ -23,7 +23,7 @@ class Article extends Component {
       return <p>This page is currently loading!</p>;
     }
     return (
-      <div>
+      <div className="singleArticleCard">
         <h3>{article.title}</h3>
         <h4>By {article.author}</h4>
         <p>{article.body}</p>
