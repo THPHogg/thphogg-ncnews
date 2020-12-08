@@ -1,19 +1,41 @@
 import React, { Component } from 'react';
-// import { Link } from '@reach/router';
+import { Link } from '@reach/router';
+import { getComments } from '../api';
 
 class Comments extends Component {
+  state = {
+    comments: [],
+    isLoading: true,
+  };
+
   componentDidMount() {
     const { article_id } = this.props;
-    console.log(article_id);
+    getComments(article_id).then((comments) => {
+      this.setState({ comments, isLoading: false });
+    });
   }
 
   render() {
+    const { comments, isLoading } = this.state;
+    if (isLoading) {
+      return <p>The comments are currently loading!</p>;
+    }
+    const { article_id } = this.props;
     return (
       <div>
-        <p>These are the comments for this article</p>
-        {/* <Link to={`/articles/${article.article_id}`}>
-        <p>Hide comments</p>
-      </Link> */}
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <li key={comment.comments_id}>
+                Comment: {comment.body}, <br></br>Author: {comment.author},
+                <br></br>Votes: {comment.votes}
+              </li>
+            );
+          })}
+        </ul>
+        <Link to={`/articles/${article_id}`}>
+          <p>Hide comments</p>
+        </Link>
       </div>
     );
   }
