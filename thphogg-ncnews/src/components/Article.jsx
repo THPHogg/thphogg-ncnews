@@ -17,8 +17,6 @@ class Article extends Component {
     });
   }
 
-  componentDidUpdate() {}
-
   render() {
     const { article, isLoading } = this.state;
     if (isLoading) {
@@ -31,7 +29,7 @@ class Article extends Component {
         <p>{article.body}</p>
         <p>Current Votes: {article.votes}</p>
         <Link to={`/articles/${article.article_id}/comments`}>
-          <p>Click here to see comments</p>
+          <p>Show comments</p>
         </Link>
         <Router>
           <Comments path="/comments" />
