@@ -24,20 +24,22 @@ class Topics extends Component {
         <h3>These are the topics currently being talked about on NC News:</h3>
         <p>
           {' '}
-          Click on the description to be taken to all the articles from that
-          topic!
+          Click on any of the cards below to be taken to all the articles from
+          that topic!
         </p>
         <ul>
           {topics.map((topic) => {
             return (
-              <li key={topic.slug} className="topicCard">
-                <b>{topic.slug} </b>
-                <br></br>
-                <br></br>
-                <Link to={`/articles/topics/${topic.slug}`}>
+              <Link to={`/articles/topics/${topic.slug}`}>
+                <li key={topic.slug} className="topicCard">
+                  <b id="topicTitle">
+                    {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}{' '}
+                  </b>
+                  <br></br>
+                  <br></br>
                   {topic.description}
-                </Link>
-              </li>
+                </li>
+              </Link>
             );
           })}
         </ul>

@@ -80,6 +80,7 @@ class Articles extends Component {
     return (
       <div>
         <h3>These are the current articles on NC News:</h3>
+        <p>Click any of the cards below and find your favourite article!</p>
         {topic ? (
           <p>You are currently looking at all the {topic} articles</p>
         ) : (
@@ -111,7 +112,8 @@ class Articles extends Component {
                 to={`/articles/${article.article_id}`}
               >
                 <li className="articleCard">
-                  Title: {article.title} <br></br>Author: {article.author}
+                  <b id="articleTitle">{article.title}</b> <br></br>
+                  <br></br>Author: {article.author}
                   <br></br>Created:{' '}
                   {moment(article.created_at, 'YYYYMMDD').fromNow()}
                   <br></br>

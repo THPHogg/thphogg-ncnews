@@ -56,7 +56,20 @@ body {
   box-shadow: 5px 5px #ef8354;
 }
 
+@media only screen and (max-width: 800px) {
+  .articleCard,
+  .topicCard,
+  .singleArticleCard {
+    max-width: 80%;
+  }
+}
+
 .commentCard {
   margin-top: 2em;
   border-bottom: 2px solid #5e6472;
+}
+
+#topicTitle,
+#articleTitle {
+  color: black;
 }
