@@ -119,7 +119,8 @@ class Articles extends Component {
                   <br></br>
                   Comment Count: {article.comment_count}
                   <br></br>
-                  Votes: {article.votes}
+                  Current Votes: {article.votes}
+                  <br></br>
                 </li>
               </Link>
             );

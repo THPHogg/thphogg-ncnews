@@ -30,8 +30,8 @@ class Topics extends Component {
         <ul>
           {topics.map((topic) => {
             return (
-              <Link to={`/articles/topics/${topic.slug}`}>
-                <li key={topic.slug} className="topicCard">
+              <Link key={topic.slug} to={`/articles/topics/${topic.slug}`}>
+                <li className="topicCard">
                   <b id="topicTitle">
                     {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}{' '}
                   </b>

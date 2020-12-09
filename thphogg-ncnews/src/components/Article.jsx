@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getArticle } from '../api';
+import { getArticle, incrementArticleVotes } from '../api';
 import { Link } from '@reach/router';
 import { Router } from '@reach/router';
 import Comments from './Comments';
@@ -17,6 +17,20 @@ class Article extends Component {
     });
   }
 
+  incrementVote = (vote) => {
+    incrementArticleVotes(this.state.article.article_id, vote).then(() => {
+      this.setState((currentState) => {
+        const updatedState = {
+          article: {
+            ...currentState.article,
+            votes: currentState.article.votes + vote,
+          },
+        };
+        return updatedState;
+      });
+    });
+  };
+
   render() {
     const { article, isLoading } = this.state;
     if (isLoading) {
@@ -28,6 +42,21 @@ class Article extends Component {
         <h4>By {article.author}</h4>
         <p>{article.body}</p>
         <p>Current Votes: {article.votes}</p>
+        <i
+          className="fas fa-plus fa-2x"
+          style={{ color: '#ef8354' }}
+          alt="Up Vote button"
+          onClick={() => this.incrementVote(1)}
+          name="upVote"
+        ></i>
+        {'       '}
+        <i
+          className="fas fa-minus fa-2x"
+          style={{ color: '#ef8354' }}
+          alt="Down Vote button"
+          name="downVote"
+          onClick={() => this.incrementVote(-1)}
+        ></i>
         <Link to={`/articles/${article.article_id}/comments`}>
           <p>Show comments</p>
         </Link>
