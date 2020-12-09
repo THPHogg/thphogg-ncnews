@@ -64,6 +64,23 @@ body {
   }
 }
 
+.fa-plus {
+  color: #4ecdc4;
+}
+.fa-minus {
+  color: #ef233c;
+}
+
+.fa-plus:hover,
+.fa-minus:hover {
+  color: #ef8354;
+}
+
+.fa-plus:active,
+.fa-minus:active {
+  color: black;
+}
+
 .commentCard {
   margin-top: 2em;
   border-bottom: 2px solid #5e6472;

@@ -44,7 +44,6 @@ class Article extends Component {
         <p>Current Votes: {article.votes}</p>
         <i
           className="fas fa-plus fa-2x"
-          style={{ color: '#ef8354' }}
           alt="Up Vote button"
           onClick={() => this.incrementVote(1)}
           name="upVote"
@@ -52,7 +51,6 @@ class Article extends Component {
         {'       '}
         <i
           className="fas fa-minus fa-2x"
-          style={{ color: '#ef8354' }}
           alt="Down Vote button"
           name="downVote"
           onClick={() => this.incrementVote(-1)}
