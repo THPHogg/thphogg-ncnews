@@ -7,6 +7,20 @@ body {
   background-color: #bfc0c0;
 }
 
+container {
+  display: flex;
+}
+
+.homeCard {
+  background-color: #ffffff;
+  max-width: 75%;
+  margin: auto;
+  margin-top: 1em;
+  border-radius: 15px;
+  padding: 1em 2em;
+  box-shadow: 5px 5px #ef8354;
+}
+
 a:link {
   text-decoration: none;
   color: #5e6472;
@@ -62,6 +76,14 @@ body {
   .singleArticleCard {
     max-width: 80%;
   }
+
+  container {
+    flex-direction: column;
+  }
+
+  .homeCard {
+    max-width: 80%;
+  }
 }
 
 .fa-plus {
@@ -71,14 +93,9 @@ body {
   color: #ef233c;
 }
 
-.fa-plus:hover,
-.fa-minus:hover {
-  color: #ef8354;
-}
-
 .fa-plus:active,
 .fa-minus:active {
-  color: black;
+  color: #ef8354;
 }
 
 .commentCard {
