@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class HomePage extends Component {
   state = {
     user: null,
+    newArticle: {},
+    topArticle: {},
   };
 
   handleChange(event) {
@@ -10,6 +13,24 @@ class HomePage extends Component {
       user: event.target.value,
     });
   }
+
+  getNewestArticle = () => {
+    return axios
+      .get(
+        'https://thphogg-nc-news.herokuapp.com/api/articles?sort_by=created_at'
+      )
+      .then(({ data }) => {
+        console.log(data.articles[0]);
+      });
+  };
+
+  getTopArticle = () => {
+    return axios
+      .get('https://thphogg-nc-news.herokuapp.com/api/articles?sort_by=votes')
+      .then(({ data }) => {
+        console.log(data.articles[0]);
+      });
+  };
 
   render() {
     const { loggedInUser, logIn, logOut } = this.props;
@@ -70,14 +91,14 @@ class HomePage extends Component {
             <h3>Top Story:</h3>
             <section className="homeCard">
               {' '}
-              <p>Hello</p>
+              <button onClick={() => this.getTopArticle()}>Click me</button>
             </section>
           </section>
           <section className="footySection">
             <h3>Newest Story:</h3>
             <section className="homeCard">
               {' '}
-              <p>Test</p>
+              <button onClick={() => this.getNewestArticle()}>Hello</button>
             </section>
           </section>
         </container>
