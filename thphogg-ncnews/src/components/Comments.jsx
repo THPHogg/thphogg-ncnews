@@ -41,7 +41,7 @@ class Comments extends Component {
     if (isLoading) {
       return <p>The comments are currently loading!</p>;
     }
-    const { article_id } = this.props;
+    const { article_id, loggedInUser } = this.props;
     return (
       <div>
         <ul>
@@ -53,6 +53,14 @@ class Comments extends Component {
                 <b>Written By: </b>
                 {comment.author},<br></br>
                 <br></br>
+                {loggedInUser === comment.author ? (
+                  <div>
+                    <button>Delete Comment</button>{' '}
+                    <button>Alter Comment</button>
+                    <br></br>
+                    <br></br>
+                  </div>
+                ) : null}
                 <b>Votes: </b>
                 {comment.votes}
                 <br></br>

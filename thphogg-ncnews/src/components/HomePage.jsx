@@ -6,6 +6,7 @@ class HomePage extends Component {
     user: null,
     newArticle: 'Loading',
     topArticle: 'loading',
+    isLoading: true,
   };
 
   handleChange(event) {
@@ -16,17 +17,21 @@ class HomePage extends Component {
 
   componentDidMount() {
     getNewestArticle().then((article) => {
-      this.setState({ newArticle: article });
+      this.setState({ newArticle: article, isLoading: false });
     });
 
     getTopArticle().then((article) => {
-      this.setState({ topArticle: article });
+      this.setState({ topArticle: article, isLoading: false });
     });
   }
 
   render() {
     const { loggedInUser, logIn, logOut } = this.props;
-    const { user, newArticle, topArticle } = this.state;
+    const { user, newArticle, topArticle, isLoading } = this.state;
+
+    if (isLoading) {
+      return <p>This page is currently loading!</p>;
+    }
     return (
       <div>
         <h3>Welcome to Northcoders News!</h3>

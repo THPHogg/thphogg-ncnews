@@ -33,6 +33,7 @@ class Article extends Component {
 
   render() {
     const { article, isLoading } = this.state;
+    const { loggedInUser } = this.props;
     if (isLoading) {
       return <p>This page is currently loading!</p>;
     }
@@ -40,6 +41,11 @@ class Article extends Component {
       <div className="singleArticleCard">
         <h3>{article.title}</h3>
         <h4>By {article.author}</h4>
+        {loggedInUser === article.author ? (
+          <div>
+            <button>Delete Article</button> <button>Alter Article</button>
+          </div>
+        ) : null}
         <p>{article.body}</p>
         <p>Current Votes: {article.votes}</p>
         <i
@@ -59,7 +65,7 @@ class Article extends Component {
           <p>Show comments</p>
         </Link>
         <Router>
-          <Comments path="/comments" />
+          <Comments path="/comments" loggedInUser={loggedInUser} />
         </Router>
       </div>
     );
