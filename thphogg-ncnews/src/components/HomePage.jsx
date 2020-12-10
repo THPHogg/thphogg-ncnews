@@ -1,43 +1,89 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const HomePage = () => {
-  return (
-    <div>
-      <h3>Welcome to Northcoders News!</h3>
-      <p>The home of all things coding, cooking and footy!</p>
-      <container>
-        <section className="codingSection">
-          <h3>Coding</h3>
-          <section className="homeCard">
-            <p>
-              Here is a little bit of information on the great articles you can
-              find waiting for you:
-            </p>
+class HomePage extends Component {
+  state = {
+    user: null,
+  };
+
+  handleChange(event) {
+    this.setState({
+      user: event.target.value,
+    });
+  }
+
+  render() {
+    const { loggedInUser, logIn, logOut } = this.props;
+    const { user } = this.state;
+    return (
+      <div>
+        <h3>Welcome to Northcoders News!</h3>
+        <p>The home of all things coding, cooking and footy!</p>
+        <container>
+          <section className="codingSection">
+            <h3>Login:</h3>
+            <section className="homeCard">
+              {!loggedInUser ? (
+                <div>
+                  <p>
+                    Please login below to unlock features such as posting,
+                    deleting and altering your comments and articles!
+                  </p>
+                  <br></br>
+                  <form>
+                    <label>
+                      Username:<br></br>
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        onChange={(event) => this.handleChange(event)}
+                      ></input>
+                    </label>
+                    <br></br>
+                    <br></br>
+                    <label>
+                      Password:<br></br>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                      ></input>
+                    </label>
+                    <br></br>
+                    <br></br>
+                    <button onClick={() => logIn(user)}>Login</button>
+                  </form>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    Welcome {loggedInUser}, you are now able to post delete and
+                    alter your comments or articles!
+                  </p>
+                  <br></br>
+                  <button onClick={() => logOut()}>Log Out</button>
+                </div>
+              )}
+            </section>
           </section>
-        </section>
-        <section className="cookingSection">
-          <h3>Cooking</h3>
-          <section className="homeCard">
-            {' '}
-            <p>
-              Here is a little bit of information on the great articles you can
-              find waiting for you:
-            </p>
+          <section className="cookingSection">
+            <h3>Top Story:</h3>
+            <section className="homeCard">
+              {' '}
+              <p>Hello</p>
+            </section>
           </section>
-        </section>
-        <section className="footySection">
-          <h3>Footy</h3>
-          <section className="homeCard">
-            {' '}
-            <p>
-              Here is a little bit of information on the great articles you can
-              find waiting for you:
-            </p>
+          <section className="footySection">
+            <h3>Newest Story:</h3>
+            <section className="homeCard">
+              {' '}
+              <p>Test</p>
+            </section>
           </section>
-        </section>
-      </container>
-    </div>
-  );
-};
+        </container>
+      </div>
+    );
+  }
+}
 
 export default HomePage;
