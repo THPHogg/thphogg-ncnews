@@ -30,6 +30,24 @@ export const getArticle = (article_id) => {
   });
 };
 
+export const getNewestArticle = () => {
+  return axios
+    .get(
+      'https://thphogg-nc-news.herokuapp.com/api/articles?sort_by=created_at'
+    )
+    .then(({ data }) => {
+      return data.articles[0];
+    });
+};
+
+export const getTopArticle = () => {
+  return axios
+    .get('https://thphogg-nc-news.herokuapp.com/api/articles?sort_by=votes')
+    .then(({ data }) => {
+      return data.articles[0];
+    });
+};
+
 export const incrementArticleVotes = (article_id, votes) => {
   return ncNewsApi
     .patch(`/articles/${article_id}`, {
