@@ -90,6 +90,7 @@ class Comments extends Component {
               rows="4"
               cols="50"
               name="comment"
+              id="comment"
               onChange={this.handleChange}
             ></textarea>
             <br></br>
