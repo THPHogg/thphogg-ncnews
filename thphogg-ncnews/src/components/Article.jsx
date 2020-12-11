@@ -41,11 +41,6 @@ class Article extends Component {
       <div className="singleArticleCard">
         <h3>{article.title}</h3>
         <h4>By {article.author}</h4>
-        {loggedInUser === article.author ? (
-          <div>
-            <button>Delete Article</button> <button>Alter Article</button>
-          </div>
-        ) : null}
         <p>{article.body}</p>
         <p>Current Votes: {article.votes}</p>
         <i

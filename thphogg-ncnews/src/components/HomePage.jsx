@@ -12,15 +12,15 @@ class HomePage extends Component {
       'cooljmessy',
     ],
     user: null,
+    password: null,
     newArticle: 'Loading',
     topArticle: 'loading',
     isLoading: true,
   };
 
   handleChange(event) {
-    this.setState({
-      user: event.target.value,
-    });
+    const { value } = event.target;
+    this.setState({ [event.target.id]: value });
   }
 
   componentDidMount() {
@@ -41,6 +41,7 @@ class HomePage extends Component {
       topArticle,
       isLoading,
       currentUsers,
+      password,
     } = this.state;
 
     if (isLoading) {
@@ -57,8 +58,9 @@ class HomePage extends Component {
               {!loggedInUser ? (
                 <div>
                   <p>
-                    Please login below to unlock features such as posting,
-                    deleting and altering your comments and articles!
+                    Please login below to unlock features such as posting and
+                    deleting comments as well as being able to access all of
+                    your articles!
                   </p>
                   <br></br>
                   <form>
@@ -67,7 +69,7 @@ class HomePage extends Component {
                       <input
                         type="text"
                         name="username"
-                        id="username"
+                        id="user"
                         onChange={(event) => this.handleChange(event)}
                       ></input>
                     </label>
@@ -79,6 +81,7 @@ class HomePage extends Component {
                         type="password"
                         name="password"
                         id="password"
+                        onChange={(event) => this.handleChange(event)}
                       ></input>
                     </label>
                     <br></br>
@@ -86,11 +89,13 @@ class HomePage extends Component {
                     <button onClick={() => logIn(user)}>Login</button>
                   </form>
                 </div>
-              ) : currentUsers.includes(loggedInUser) ? (
+              ) : currentUsers.includes(loggedInUser) &&
+                password === 'password' ? (
                 <div>
                   <p>
-                    Welcome <b>{loggedInUser}</b>, you are now able to post
-                    delete and alter your comments and articles!
+                    Welcome <b>{loggedInUser}</b>, you are now able to post and
+                    delete comments! If you look at the top of the page, you
+                    also have a "My Articles" page!
                   </p>
                   <br></br>
                   <button onClick={() => logOut()}>Log Out</button>
@@ -98,8 +103,9 @@ class HomePage extends Component {
               ) : (
                 <div>
                   <p>
-                    Please login below to unlock features such as posting,
-                    deleting and altering your comments and articles!
+                    Please login below to unlock features such as posting and
+                    deleting comments as well as being able to access all of
+                    your articles!
                   </p>
                   <br></br>
                   <form>
@@ -126,7 +132,9 @@ class HomePage extends Component {
                     <br></br>
                     <button onClick={() => logIn(user)}>Login</button>
                   </form>
-                  {alert('Please login with a registered user!')}
+                  {alert(
+                    'Please login with a registered user, and the correct password!'
+                  )}
                 </div>
               )}
             </section>
