@@ -24,6 +24,10 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+    const user = this.props.loggedInUser;
+    const password = this.props.password;
+    this.setState({ user, password });
+
     getNewestArticle().then((article) => {
       this.setState({ newArticle: article, isLoading: false });
     });
@@ -86,7 +90,7 @@ class HomePage extends Component {
                     </label>
                     <br></br>
                     <br></br>
-                    <button onClick={() => logIn(user)}>Login</button>
+                    <button onClick={() => logIn(user, password)}>Login</button>
                   </form>
                 </div>
               ) : currentUsers.includes(loggedInUser) &&
@@ -95,7 +99,7 @@ class HomePage extends Component {
                   <p>
                     Welcome <b>{loggedInUser}</b>, you are now able to post and
                     delete comments! If you look at the top of the page, you
-                    also have a "My Articles" page!
+                    also have a "My Articles" tab!
                   </p>
                   <br></br>
                   <button onClick={() => logOut()}>Log Out</button>

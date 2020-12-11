@@ -41,9 +41,6 @@ class UserArticles extends Component {
                   <br></br>
                   Current Votes: {article.votes}
                 </Link>
-                <br></br>
-                <br></br>
-                <button>Delete Article</button> <button>Alter Article</button>
               </li>
             ) : (
               ''

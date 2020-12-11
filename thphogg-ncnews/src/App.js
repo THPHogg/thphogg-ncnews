@@ -12,10 +12,11 @@ import UserArticles from './components/UserArticles';
 class App extends Component {
   state = {
     loggedInUser: null,
+    password: null,
   };
 
-  logIn = (newUser) => {
-    this.setState({ loggedInUser: newUser });
+  logIn = (newUser, password) => {
+    this.setState({ loggedInUser: newUser, password });
   };
 
   logOut = () => {
@@ -31,6 +32,7 @@ class App extends Component {
           <HomePage
             path="/"
             loggedInUser={this.state.loggedInUser}
+            password={this.state.password}
             logIn={this.logIn}
             logOut={this.logOut}
           />
