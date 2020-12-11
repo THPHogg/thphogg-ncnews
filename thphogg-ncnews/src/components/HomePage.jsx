@@ -3,6 +3,14 @@ import { getNewestArticle, getTopArticle } from '../api';
 
 class HomePage extends Component {
   state = {
+    currentUsers: [
+      'weegembump',
+      'happyamy2016',
+      'jessjelly',
+      'grumpy19',
+      'tickle122',
+      'cooljmessy',
+    ],
     user: null,
     newArticle: 'Loading',
     topArticle: 'loading',
@@ -27,7 +35,13 @@ class HomePage extends Component {
 
   render() {
     const { loggedInUser, logIn, logOut } = this.props;
-    const { user, newArticle, topArticle, isLoading } = this.state;
+    const {
+      user,
+      newArticle,
+      topArticle,
+      isLoading,
+      currentUsers,
+    } = this.state;
 
     if (isLoading) {
       return <p>This page is currently loading!</p>;
@@ -72,7 +86,7 @@ class HomePage extends Component {
                     <button onClick={() => logIn(user)}>Login</button>
                   </form>
                 </div>
-              ) : (
+              ) : currentUsers.includes(loggedInUser) ? (
                 <div>
                   <p>
                     Welcome <b>{loggedInUser}</b>, you are now able to post
@@ -80,6 +94,39 @@ class HomePage extends Component {
                   </p>
                   <br></br>
                   <button onClick={() => logOut()}>Log Out</button>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    Please login below to unlock features such as posting,
+                    deleting and altering your comments and articles!
+                  </p>
+                  <br></br>
+                  <form>
+                    <label>
+                      Username:<br></br>
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        onChange={(event) => this.handleChange(event)}
+                      ></input>
+                    </label>
+                    <br></br>
+                    <br></br>
+                    <label>
+                      Password:<br></br>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                      ></input>
+                    </label>
+                    <br></br>
+                    <br></br>
+                    <button onClick={() => logIn(user)}>Login</button>
+                  </form>
+                  {alert('Please login with a registered user!')}
                 </div>
               )}
             </section>
