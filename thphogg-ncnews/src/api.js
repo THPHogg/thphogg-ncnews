@@ -67,6 +67,10 @@ export const incrementCommentVotes = (comment_id, votes) => {
     });
 };
 
+export const removeUserComment = (comment_id) => {
+  return ncNewsApi.delete(`/comments/${comment_id}`);
+};
+
 export const getComments = (article_id) => {
   return ncNewsApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
     return data.comments;

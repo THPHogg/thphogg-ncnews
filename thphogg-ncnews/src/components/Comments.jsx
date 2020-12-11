@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { getComments, incrementCommentVotes } from '../api';
+import { getComments, incrementCommentVotes, removeUserComment } from '../api';
 
 class Comments extends Component {
   state = {
@@ -36,6 +36,17 @@ class Comments extends Component {
     });
   };
 
+  deleteComment = (id) => {
+    removeUserComment(id).then(() => {
+      this.setState((currentState) => {
+        const newComments = currentState.comments.filter(
+          (comment) => comment.comments_id !== id
+        );
+        return { comments: newComments };
+      });
+    });
+  };
+
   render() {
     const { comments, isLoading } = this.state;
     if (isLoading) {
@@ -55,8 +66,11 @@ class Comments extends Component {
                 <br></br>
                 {loggedInUser === comment.author ? (
                   <div>
-                    <button>Delete Comment</button>{' '}
-                    <button>Alter Comment</button>
+                    <button
+                      onClick={() => this.deleteComment(comment.comments_id)}
+                    >
+                      Delete Comment
+                    </button>
                     <br></br>
                     <br></br>
                   </div>
