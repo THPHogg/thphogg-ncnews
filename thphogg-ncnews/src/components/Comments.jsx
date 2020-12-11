@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { getComments, incrementCommentVotes, removeUserComment } from '../api';
+import {
+  getComments,
+  incrementCommentVotes,
+  removeUserComment,
+  postComment,
+} from '../api';
 
 class Comments extends Component {
   state = {
     comments: [],
     isLoading: true,
+    newComment: '',
   };
 
   componentDidMount() {
@@ -47,14 +53,56 @@ class Comments extends Component {
     });
   };
 
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ newComment: value });
+  };
+
+  addComment = (articleId, username, body) => {
+    postComment(articleId, username, body).then((comment) => {
+      this.setState((currentState) => {
+        const newComments = [...currentState.comments];
+        newComments.unshift(comment);
+        const newState = {
+          comments: newComments,
+          newComment: '',
+        };
+        return newState;
+      });
+    });
+  };
+
   render() {
-    const { comments, isLoading } = this.state;
+    const { comments, isLoading, newComment } = this.state;
     if (isLoading) {
       return <p>The comments are currently loading!</p>;
     }
     const { article_id, loggedInUser } = this.props;
     return (
       <div>
+        {loggedInUser ? (
+          <div>
+            <p>
+              If you have any thoughts on the article, please leave them here:
+            </p>
+            {/* <form> */}
+            <textarea
+              rows="4"
+              cols="50"
+              name="comment"
+              onChange={this.handleChange}
+            ></textarea>
+            <br></br>
+            <button
+              onClick={() =>
+                this.addComment(article_id, loggedInUser, newComment)
+              }
+            >
+              Submit
+            </button>
+            {/* </form> */}
+          </div>
+        ) : null}
         <ul>
           {comments.map((comment) => {
             return (
