@@ -16,7 +16,7 @@ body {
   display: flex;
 }
 
-.newStorySection,
+.lowerSection > .newStorySection,
 .topStorySection {
   flex-grow: 1;
 }

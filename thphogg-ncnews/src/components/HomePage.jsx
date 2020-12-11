@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { getNewestArticle, getTopArticle } from '../api';
 
+// for anyone doing feedback: the username you input has to be of an already existing author and all passwords are: password
+
 class HomePage extends Component {
   state = {
     currentUsers: [
